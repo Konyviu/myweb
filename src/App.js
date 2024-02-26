@@ -8,8 +8,6 @@ function App() {
   const [name, setName] = useState('')
   const [value, setValue] = useState('')
   const [quantity, setQuantity] = useState('')
-  const [products,setProducts] = useState([])
-  const [error,setError] = useState('')
 
   const addProductHandler = async () => {
     try{
