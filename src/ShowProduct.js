@@ -1,16 +1,29 @@
-import { useState,useEffect } from "react";
-import axios from "axios";
+import React, { useState,useEffect } from "react"
+import axios from "axios"
 
 function ShowProduct(){
-    const [product,setProduct] = useState([])
+    const [productList,setProductList] = useState([])
     useEffect(() => {
         console.log("request to API")
-        axios.get("http://localhost:5000/ShowProduct").then(Response => setProduct(Response.data))
+        axios.get("http://localhost:5000/ShowProduct")
+        .then((response) => setProductList(response.data))
+        .catch((error) => console.error("Error fetching data:", error))
     },[])
 
-    const productList = product.map(p => <li>{p.Name}{p.Value}{p.Quantity}</li>)
+    console.log(productList)
 
-    return (<ul>{productList}</ul>)
+    return (
+    <ul>
+        {/* <li>{productList}</li> */}
+        {productList.map((product,idx) => (
+            <li key = {idx}>
+                <span>Name: {product.Name}</span>
+                <span>Value: {product.Value}</span>
+                <span>Quantity: {product.Quantity}</span>
+            </li>
+        ))}
+    </ul>
+    )
   }
 
   export default ShowProduct;
